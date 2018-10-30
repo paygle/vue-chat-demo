@@ -15,7 +15,6 @@ export default {
   data() {
     return {
       fontSize: 12,
-      sendkey: '',
       visible: false,
       mini: false,
       sendctrls: SEND_TEXT_CTRLS,
@@ -23,7 +22,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('webchat', ['user'])
+    ...mapGetters('webchat', ['user', 'sessionWho'])
   },
   methods: {
     ...mapActions('webchat', ['initData']),
@@ -49,7 +48,6 @@ export default {
       }
     },
     clickCommand(cmd) {
-      debugger
       if (this.$refs.stext) {
         this.$refs.stext.sendmode = cmd
         this.$refs.stext.placeholder = cmd === 'ctrls' ? SEND_TEXT_CTRLS : SEND_TEXT_ENTER
@@ -75,6 +73,7 @@ export default {
     </div>
     <div :class="['main', `ft${fontSize}`]">
       <div class="win-top">
+        <span class="with-who">{{sessionWho.user.name}}</span>
         <i class="el-icon-minus" @click="minimize"></i>
         <i class="el-icon-close" @click="doClose"></i>
       </div>
@@ -89,7 +88,7 @@ export default {
             :value="item">
           </el-option>
         </el-select>
-        <el-dropdown 
+        <el-dropdown
           @click="sendMessage"
           @command="clickCommand"
           size="mini"
@@ -106,13 +105,12 @@ export default {
   </div>
   <div class="web-chat-mini" v-if="!visible && mini" @click="maximize" data-f42d2346wb>
     <img class="avatar" :title="user.name" :src="user.img">
-    <p class="name">{{user.name}}</p>
+    <span class="name">{{user.name}}</span>
   </div>
 </transition>
 </template>
 
 <style lang="less">
-
 .web-chat-mini[data-f42d2346wb] {
   position: fixed;
   right: 5px;
@@ -144,6 +142,15 @@ export default {
   box-shadow: 0px 1px 30px 3px rgba(0,0,0,0.3);
   overflow: hidden;
 
+  ul{
+    padding: 0;
+  }
+
+  li{
+    list-style: none;
+    text-align: left;
+  }
+
   .ft12 .font-text {
     font-size: 12px;
   }
@@ -161,6 +168,12 @@ export default {
     height: 30px;
     line-height: 30px;
     text-align: right;
+    border-bottom: 1px solid #ddd;
+
+    .with-who {
+      float: left;
+      margin-left: 20px;
+    }
 
     i {
       font-size: 16px;

@@ -6,18 +6,17 @@ export default {
   data() {
     return {
       content: '',
-      sendmode: 'ctrls',
-      placeholder: '按 Ctrl + Enter 发送'
+      sendmode: 'enter',
+      placeholder: '按 Enter 发送'
     }
   },
   methods: {
     ...mapActions('webchat', ['sendMessage']),
 
     onKeyup(e) {
-
       if (this.sendmode === 'ctrls' && e.ctrlKey && e.keyCode === 13) {
         this.sendMSG()
-      } else if (this.sendmode === 'enter'&& e.keyCode === 13) {
+      } else if (this.sendmode === 'enter' && e.keyCode === 13) {
         this.sendMSG()
       }
     },

@@ -4,45 +4,45 @@ import WebChat from './main.vue'
 export default {
   data() {
     return {
-      instance: null
+      instanceChat: null
     }
   },
   methods: {
-    initInstance() {
+    initInstanceChat() {
       const WebChatConstructor = Vue.extend(WebChat)
-      this.instance = new WebChatConstructor({
+      this.instanceChat = new WebChatConstructor({
         el: document.createElement('div'),
         store: this.$store
       })
     },
     WebChat(options = {}) {
       if (!this.instance) {
-        this.initInstance()
+        this.initInstanceChat()
       }
 
-      if (!this.instance.visible) {
+      if (!this.instanceChat.visible) {
         for (let prop in options) {
           if (options.hasOwnProperty(prop)) {
-            this.instance[prop] = options[prop]
+            this.instanceChat[prop] = options[prop]
           }
         }
-        document.body.appendChild(this.instance.$el)
+        document.body.appendChild(this.instanceChat.$el)
       }
     },
 
-    open() {
-      if (this.instance) {
-        this.instance.doOpen()
+    openChat() {
+      if (this.instanceChat) {
+        this.instanceChat.doOpen()
       } else {
         this.WebChat()
       }
-      this.instance.visible = true
+      this.instanceChat.visible = true
     },
 
-    close() {
-      if (this.instance) {
-        this.instance.doClose()
-        this.instance.visible = false
+    closeChat() {
+      if (this.instanceChat) {
+        this.instanceChat.doClose()
+        this.instanceChat.visible = false
       }
     }
   }

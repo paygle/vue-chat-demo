@@ -17,13 +17,13 @@ export default {
 
 <template>
 <div class="card" data-78ecard23a>
-  <header>
+  <div>
     <img class="avatar" width="40" height="40" :alt="user.name" :src="user.img">
     <p class="name">{{user.name}}</p>
-  </header>
-  <footer>
+  </div>
+  <div class="footer">
     <input class="search" type="text" placeholder="search user..." @keyup="onKeyup">
-  </footer>
+  </div>
 </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
   padding: 12px;
   border-bottom: solid 1px #24272c;
 
-  footer {
+  .footer {
     margin-top: 10px;
   }
 

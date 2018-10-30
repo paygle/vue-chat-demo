@@ -12,23 +12,16 @@ export default {
   mixins: [WebChat],
   data() {
     return {
-      chat: null
+      
     }
   },
   methods: {
     chatting() {
-      this.open()
+      this.openChat()
     }
   }
 }
 </script>
 <style lang="less">
- ul{
-  padding: 0;
- }
- li{
-  list-style: none;
-  text-align: left;
- }
 
 </style>

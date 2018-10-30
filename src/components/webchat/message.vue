@@ -19,13 +19,19 @@ export default {
   directives: {
     scrollBottom: {
       update(el) {
-        setTimeout(()=>el.scrollTop = el.scrollHeight, 100)
+        setTimeout(() => { el.scrollTop = el.scrollHeight }, 100)
       }
     }
   },
 
   computed: {
     ...mapGetters('webchat', ['user', 'sessionWho'])
+  },
+
+  methods: {
+    parseContent(data) {
+      return String(data).replace(/\n/g, '<br/>')
+    }
   }
 }
 </script>
@@ -39,7 +45,7 @@ export default {
       </p>
       <div class="content" :class="{ self: item.self }">
         <img class="avatar" width="30" height="30" :src="item.self ? user.img : sessionWho.user.img" />
-        <div class="text font-text">{{ item.content }}</div>
+        <div class="text font-text" v-html="parseContent(item.content)"></div>
       </div>
     </li>
   </ul>
@@ -78,8 +84,7 @@ export default {
     padding: 0 10px;
     max-width: calc(100% - 80px);
     min-height: 30px;
-    line-height: 2.5;
-    font-size: 12px;
+    line-height: 2;
     text-align: left;
     word-break: break-all;
     background-color: #fafafa;
