@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-<div class="list">
+<div class="list" data-list3912xe>
   <ul>
     <li
       v-for="item in sessions"
@@ -25,8 +25,12 @@ export default {
 </div>
 </template>
 
-<style lang="less" scoped>
-.list {
+<style lang="less">
+.list[data-list3912xe] {
+  overflow-y: scroll;
+  height: 82%;
+  width: calc(100% + 30px);
+
   li {
     padding: 12px 15px;
     border-bottom: 1px solid #292c33;

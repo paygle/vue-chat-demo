@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-<div class="card">
+<div class="card" data-78ecard23a>
   <header>
     <img class="avatar" width="40" height="40" :alt="user.name" :src="user.img">
     <p class="name">{{user.name}}</p>
@@ -27,8 +27,8 @@ export default {
 </div>
 </template>
 
-<style lang="less" scoped>
-.card {
+<style lang="less">
+.card[data-78ecard23a] {
   padding: 12px;
   border-bottom: solid 1px #24272c;
 

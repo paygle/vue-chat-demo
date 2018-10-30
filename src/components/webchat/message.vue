@@ -1,5 +1,8 @@
 <script>
 import { mapGetters } from 'vuex'
+function fillz(d) {
+  return d < 10 ? `0${d}` : d
+}
 
 export default {
   name: 'message',
@@ -9,14 +12,14 @@ export default {
       if (typeof date === 'string') {
         date = new Date(date)
       }
-      return date.getHours() + ':' + date.getMinutes()
+      return `${fillz(date.getHours())} : ${fillz(date.getMinutes())} : ${fillz(date.getSeconds())}`
     }
   },
 
   directives: {
     scrollBottom: {
       update(el) {
-        el.scrollTop = el.scrollHeight - el.clientHeight
+        setTimeout(()=>el.scrollTop = el.scrollHeight, 100)
       }
     }
   },
@@ -28,23 +31,23 @@ export default {
 </script>
 
 <template>
-<div class="message" v-scroll-bottom="sessionWho.messages">
+<div class="message" v-scroll-bottom="sessionWho.messages" data-7694f680>
   <ul v-if="sessionWho">
     <li v-for="item in sessionWho.messages" :key="item.id">
       <p class="time">
         <span>{{ item.date | time }}</span>
       </p>
-      <div class="main" :class="{ self: item.self }">
+      <div class="content" :class="{ self: item.self }">
         <img class="avatar" width="30" height="30" :src="item.self ? user.img : sessionWho.user.img" />
-        <div class="text">{{ item.content }}</div>
+        <div class="text font-text">{{ item.content }}</div>
       </div>
     </li>
   </ul>
 </div>
 </template>
 
-<style lang="less" scoped>
-.message {
+<style lang="less">
+.message[data-7694f680] {
   padding: 10px 15px;
   overflow-y: scroll;
 
@@ -73,7 +76,7 @@ export default {
     display: inline-block;
     position: relative;
     padding: 0 10px;
-    max-width: ~"calc(100% - 40px)";
+    max-width: calc(100% - 80px);
     min-height: 30px;
     line-height: 2.5;
     font-size: 12px;

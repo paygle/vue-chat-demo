@@ -1,28 +1,23 @@
 <template>
   <div class="home">
     <el-button @click="chatting">在线聊天</el-button>
-    <web-chat ref='chat'></web-chat>
   </div>
 </template>
 
 <script>
-import WebChat from 'components/webchat/main'
+import WebChat from 'components/webchat'
 
 export default {
   name: 'chat-demo',
-
-  components: {
-    WebChat
-  },
-
+  mixins: [WebChat],
   data() {
     return {
-
+      chat: null
     }
   },
   methods: {
     chatting() {
-      this.$refs.chat.open()
+      this.open()
     }
   }
 }
